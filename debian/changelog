@@ -1,0 +1,27 @@
+abseil (0~20200225.2-3~bpo10+1) buster-backports; urgency=medium
+
+  * Rebuild for buster-backports.
+  * Lower debhelper-compat to 11 for dwz compatibility
+
+ -- Pirate Praveen <praveen@debian.org>  Sat, 01 Aug 2020 01:18:41 +0530
+
+abseil (0~20200225.2-3) unstable; urgency=medium
+
+  * Replace symbols file with shlibs infrastructure. (Closes: #966183)
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Fri, 24 Jul 2020 09:42:03 -0400
+
+abseil (0~20200225.2-2) unstable; urgency=medium
+
+  * Rebuild for unstable.
+  * Rework symbols file using pkg-kde-tools for increased robustness.
+  * Avoid SSSE3 on amd64 and SSE2 on i386 for greater processor
+    compatibility.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Thu, 23 Jul 2020 17:23:57 -0400
+
+abseil (0~20200225.2-1) experimental; urgency=medium
+
+  * Initial release. (Closes: #888705)
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Thu, 18 Jun 2020 16:27:49 -0400

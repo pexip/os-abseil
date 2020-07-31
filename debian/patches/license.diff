@@ -1,0 +1,59 @@
+From: Benjamin Barenblat <bbaren@google.com>
+Subject: Correct Apache license headers
+Forwarded: yes
+Applied-Upstream: https://github.com/abseil/abseil-cpp/commit/bd317cae3bc2630d1b12c5f1d77036e937d1d725
+
+This repository has always been licensed under the Apache license, but some
+files lacked headers to locally indicate that fact. Add the appropriate headers.
+
+The author works at Google. Upstream applied this patch as Piper revision
+310223650 and exported it to GitHub; the Applied-Upstream URL above points to
+the exported commit.
+
+--- a/absl/debugging/internal/stacktrace_arm-inl.inc
++++ b/absl/debugging/internal/stacktrace_arm-inl.inc
+@@ -1,9 +1,18 @@
+-// Copyright 2011 and onwards Google Inc.
+-// All rights reserved.
++// Copyright 2017 The Abseil Authors.
++//
++// Licensed under the Apache License, Version 2.0 (the "License");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//      https://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an "AS IS" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
+ //
+-// Author: Doug Kwan
+ // This is inspired by Craig Silverstein's PowerPC stacktrace code.
+-//
+ 
+ #ifndef ABSL_DEBUGGING_INTERNAL_STACKTRACE_ARM_INL_H_
+ #define ABSL_DEBUGGING_INTERNAL_STACKTRACE_ARM_INL_H_
+--- a/absl/debugging/internal/stacktrace_generic-inl.inc
++++ b/absl/debugging/internal/stacktrace_generic-inl.inc
+@@ -1,7 +1,16 @@
+-// Copyright 2000 - 2007 Google Inc.
+-// All rights reserved.
++// Copyright 2017 The Abseil Authors.
+ //
+-// Author: Sanjay Ghemawat
++// Licensed under the Apache License, Version 2.0 (the "License");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//      https://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an "AS IS" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
+ //
+ // Portable implementation - just use glibc
+ //
