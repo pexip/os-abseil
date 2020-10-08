@@ -14,7 +14,8 @@
 
 Source: abseil
 Priority: optional
-Maintainer: Benjamin Barenblat <bbaren@debian.org>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Benjamin Barenblat <bbaren@debian.org>
 Build-Depends:
  cmake (>= 3.5),
  debhelper-compat (= 11),
@@ -28,6 +29,7 @@ Description: extensions to the C++ standard library
  codebase and has been extensively tested and used in production. In some cases,
  Abseil provides pieces missing from the C++ standard; in others, Abseil
  provides alternatives to the standard for special needs.
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster-backports
 
 Package: libabsl-dev
 Architecture: any
