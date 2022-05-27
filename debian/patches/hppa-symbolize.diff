@@ -1,0 +1,103 @@
+From: Benjamin Barenblat <bbaren@google.com>
+Subject: Support symbolization on PA-RISC
+Forwarded: yes
+Applied-Upstream: https://github.com/abseil/abseil-cpp/commit/7f850b3167fb38e6b4a9ce1824e6fabd733b5d62
+
+Null out supervisor bits in PA-RISC addresses before symbolizing, and
+handle function descriptor tables correctly.
+
+Change symbolize_test.cc to use 32-bit aligned addresses, allowing that
+test to pass on PA-RISC.
+
+The author works at Google. Upstream applied this patch as Piper
+revision 428590564 and exported it to GitHub; the Applied-Upstream URL
+above points to the exported commit.
+
+--- a/absl/debugging/symbolize_elf.inc
++++ b/absl/debugging/symbolize_elf.inc
+@@ -319,6 +319,7 @@
+                                            const ptrdiff_t relocation,
+                                            char *out, int out_size,
+                                            char *tmp_buf, int tmp_buf_size);
++  const char *GetUncachedSymbol(const void *pc);
+ 
+   enum {
+     SYMBOL_BUF_SIZE = 3072,
+@@ -1329,13 +1330,7 @@
+ // they are called here as well.
+ // To keep stack consumption low, we would like this function to not
+ // get inlined.
+-const char *Symbolizer::GetSymbol(const void *const pc) {
+-  const char *entry = FindSymbolInCache(pc);
+-  if (entry != nullptr) {
+-    return entry;
+-  }
+-  symbol_buf_[0] = '\0';
+-
++const char *Symbolizer::GetUncachedSymbol(const void *pc) {
+   ObjFile *const obj = FindObjFile(pc, 1);
+   ptrdiff_t relocation = 0;
+   int fd = -1;
+@@ -1423,6 +1418,42 @@
+   return InsertSymbolInCache(pc, symbol_buf_);
+ }
+ 
++const char *Symbolizer::GetSymbol(const void *pc) {
++  const char *entry = FindSymbolInCache(pc);
++  if (entry != nullptr) {
++    return entry;
++  }
++  symbol_buf_[0] = '\0';
++
++#ifdef __hppa__
++  {
++    // In some contexts (e.g., return addresses), PA-RISC uses the lowest two
++    // bits of the address to indicate the privilege level. Clear those bits
++    // before trying to symbolize.
++    const auto pc_bits = reinterpret_cast<uintptr_t>(pc);
++    const auto address = pc_bits & ~0x3;
++    entry = GetUncachedSymbol(reinterpret_cast<const void *>(address));
++    if (entry != nullptr) {
++      return entry;
++    }
++
++    // In some contexts, PA-RISC also uses bit 1 of the address to indicate that
++    // this is a cross-DSO function pointer. Such function pointers actually
++    // point to a procedure label, a struct whose first 32-bit (pointer) element
++    // actually points to the function text. With no symbol found for this
++    // address so far, try interpreting it as a cross-DSO function pointer and
++    // see how that goes.
++    if (pc_bits & 0x2) {
++      return GetUncachedSymbol(*reinterpret_cast<const void *const *>(address));
++    }
++
++    return nullptr;
++  }
++#else
++  return GetUncachedSymbol(pc);
++#endif
++}
++
+ bool RemoveAllSymbolDecorators(void) {
+   if (!g_decorators_mu.TryLock()) {
+     // Someone else is using decorators. Get out.
+--- a/absl/debugging/symbolize_test.cc
++++ b/absl/debugging/symbolize_test.cc
+@@ -378,12 +378,14 @@
+                 DummySymbolDecorator, &c_message),
+             0);
+ 
+-  char *address = reinterpret_cast<char *>(1);
+-  EXPECT_STREQ("abc", TrySymbolize(address++));
++  // Use addresses 4 and 8 here to ensure that we always use valid addresses
++  // even on systems that require instructions to be 32-bit aligned.
++  char *address = reinterpret_cast<char *>(4);
++  EXPECT_STREQ("abc", TrySymbolize(address));
+ 
+   EXPECT_TRUE(absl::debugging_internal::RemoveSymbolDecorator(ticket_b));
+ 
+-  EXPECT_STREQ("ac", TrySymbolize(address++));
++  EXPECT_STREQ("ac", TrySymbolize(address + 4));
+ 
+   // Cleanup: remove all remaining decorators so other stack traces don't
+   // get mystery "ac" decoration.
