@@ -29,7 +29,7 @@ Description: extensions to the C++ standard library
  codebase and has been extensively tested and used in production. In some cases,
  Abseil provides pieces missing from the C++ standard; in others, Abseil
  provides alternatives to the standard for special needs.
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster-backports
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ bookworm
 
 Package: libabsl-dev
 Architecture: any
