@@ -1,3 +1,9 @@
+abseil (0~20210324.2-4pexip1) pexip-bullseye; urgency=medium
+
+  * New upstream version from bookworm.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Mon, 25 Jul 2022 09:37:12 +0100
+
 abseil (0~20210324.2-4) unstable; urgency=medium
 
   * Fix "spurious -Wl flag in some pkg-config entries" by backporting a
