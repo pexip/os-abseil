@@ -18,9 +18,9 @@ Maintainer: Benjamin Barenblat <bbaren@debian.org>
 Build-Depends:
  cmake (>= 3.5),
  debhelper-compat (= 12),
- googletest (>= 1.10.0.20200926) [!mipsel !ppc64]
+ googletest (>= 1.12) [!mipsel !ppc64] <!nocheck>
 Rules-Requires-Root: no
-Standards-Version: 4.6.0
+Standards-Version: 4.6.1
 Section: libs
 Homepage: https://abseil.io/
 Vcs-Browser: https://salsa.debian.org/debian/abseil
@@ -37,7 +37,7 @@ Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends:
- libabsl20210324 (= ${binary:Version}),
+ libabsl20220623 (= ${binary:Version}),
  ${misc:Depends},
 Recommends: cmake (>= 2.6) | pkg-config, g++ (>= 5.1)
 Description: ${source:Synopsis} (development files)
@@ -46,7 +46,7 @@ Description: ${source:Synopsis} (development files)
  This package contains header files and other data necessary for developing with
  Abseil.
 
-Package: libabsl20210324
+Package: libabsl20220623
 Architecture: any
 Multi-Arch: same
 Depends: ${shlibs:Depends}, ${misc:Depends}
