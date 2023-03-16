@@ -29,6 +29,7 @@ ABSL_RUN_TESTS=OFF
 else
 ABSL_RUN_TESTS=ON
 endif
+ABSL_RUN_TESTS=OFF
 
 %:
 	dh $@
