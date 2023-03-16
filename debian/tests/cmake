@@ -32,7 +32,7 @@ EOF
 cat >CMakeLists.txt <<EOF
 cmake_minimum_required(VERSION 3.5)
 project(test CXX)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 add_executable(test test.cc)
 find_package(absl REQUIRED)
 target_link_libraries(test absl::strings)

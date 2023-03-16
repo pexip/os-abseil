@@ -13,22 +13,15 @@ Configure Abseil for Debian.
 
   - Enable upstream's hardened build mode.
 
-  - Disable Intel SSE2 on i386, since Debian supports some i386 processors
-    without that extension. Keep it enabled on amd64, since all amd64 processors
-    have it.
-
-  - Disable Intel SSSE3 entirely, since no i386 processor supports it and Debian
-    supports amd64 processors without it.
-
 --- a/CMake/AbseilHelpers.cmake
 +++ b/CMake/AbseilHelpers.cmake
-@@ -263,7 +263,8 @@
+@@ -281,7 +281,8 @@
      if(ABSL_ENABLE_INSTALL)
        set_target_properties(${_NAME} PROPERTIES
          OUTPUT_NAME "absl_${_NAME}"
--        SOVERSION "2103.0.1"
-+        SOVERSION 20210324
-+        VERSION "20210324.0.0"
+-        SOVERSION "2206.0.0"
++        SOVERSION 20220623
++        VERSION "20220623.0.0"
        )
      endif()
    else()
@@ -74,8 +67,8 @@ Configure Abseil for Debian.
  // allowed.
  
  #define ABSL_OPTION_USE_INLINE_NAMESPACE 1
--#define ABSL_OPTION_INLINE_NAMESPACE_NAME lts_20210324
-+#define ABSL_OPTION_INLINE_NAMESPACE_NAME debian2
+-#define ABSL_OPTION_INLINE_NAMESPACE_NAME lts_20220623
++#define ABSL_OPTION_INLINE_NAMESPACE_NAME debian3
  
  // ABSL_OPTION_HARDENED
  //
@@ -87,29 +80,3 @@ Configure Abseil for Debian.
 +#define ABSL_OPTION_HARDENED 1
  
  #endif  // ABSL_BASE_OPTIONS_H_
---- a/absl/container/internal/have_sse.h
-+++ b/absl/container/internal/have_sse.h
-@@ -17,22 +17,14 @@
- #define ABSL_CONTAINER_INTERNAL_HAVE_SSE_H_
- 
- #ifndef ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSE2
--#if defined(__SSE2__) ||  \
--    (defined(_MSC_VER) && \
--     (defined(_M_X64) || (defined(_M_IX86) && _M_IX86_FP >= 2)))
-+#if defined(__x86_64__) || (defined(_MSC_VER) && defined(_M_X64))
- #define ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSE2 1
- #else
- #define ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSE2 0
- #endif
- #endif
- 
--#ifndef ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSSE3
--#ifdef __SSSE3__
--#define ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSSE3 1
--#else
- #define ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSSE3 0
--#endif
--#endif
- 
- #if ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSSE3 && \
-     !ABSL_INTERNAL_RAW_HASH_SET_HAVE_SSE2

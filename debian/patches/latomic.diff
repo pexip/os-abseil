@@ -9,7 +9,7 @@ if anything needs libatomic and add the DT_NEEDED entry where necessary.
 
 --- a/absl/copts/AbseilConfigureCopts.cmake
 +++ b/absl/copts/AbseilConfigureCopts.cmake
-@@ -62,4 +62,8 @@
+@@ -94,4 +94,8 @@
    set(ABSL_TEST_COPTS "")
  endif()
  

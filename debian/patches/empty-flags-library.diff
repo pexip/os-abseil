@@ -8,7 +8,7 @@ library header-only.
 
 --- a/absl/flags/CMakeLists.txt
 +++ b/absl/flags/CMakeLists.txt
-@@ -197,8 +197,6 @@
+@@ -199,8 +199,6 @@
  absl_cc_library(
    NAME
      flags
