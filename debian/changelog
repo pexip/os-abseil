@@ -1,3 +1,9 @@
+abseil (20220623.1-1pexip1) pexip; urgency=medium
+
+  * New upstream release
+
+ -- Huw Jones <huw@pexip.com>  Thu, 16 Mar 2023 16:48:23 +0000
+
 abseil (20220623.1-1) unstable; urgency=medium
 
   * New upstream release.
