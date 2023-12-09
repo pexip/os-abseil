@@ -1,3 +1,9 @@
+abseil (20220623.1-1pexip6) pexip-bookworm; urgency=medium
+
+  * Bookworm build for product distribution
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Sat, 09 Dec 2023 22:51:41 +0000
+
 abseil (20220623.1-1pexip5) pexip-bookworm; urgency=medium
 
   * Initial bookworm build
