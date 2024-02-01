@@ -1,3 +1,9 @@
+abseil (20220623.1-1+pexip24u7) pexip-bookworm; urgency=medium
+
+  * New versioning scheme
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 01 Feb 2024 15:50:37 +0000
+
 abseil (20220623.1-1pexip6) pexip-bookworm; urgency=medium
 
   * Bookworm build for product distribution
