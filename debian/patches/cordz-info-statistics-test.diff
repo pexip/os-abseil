@@ -1,6 +1,6 @@
 --- a/absl/strings/internal/cordz_info_statistics_test.cc
 +++ b/absl/strings/internal/cordz_info_statistics_test.cc
-@@ -466,6 +466,8 @@
+@@ -412,6 +412,8 @@
  }
  
  TEST(CordzInfoStatisticsTest, ThreadSafety) {
