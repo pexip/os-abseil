@@ -20,3 +20,6 @@ Depends: @, cmake (>= 3.5), g++, make
 
 Tests: bug1011294
 Depends: @, g++, pkg-config
+
+Tests: upstream1407
+Depends: @, g++, libgmock-dev

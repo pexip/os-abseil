@@ -8,7 +8,7 @@ License: Apache-2.0
 Files: *
 Copyright:
  2000-2017 Google Inc.
- 2017-2021 The Abseil Authors
+ 2017-2023 The Abseil Authors
 License: Apache-2.0
 
 Files: debian/*
