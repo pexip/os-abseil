@@ -1,3 +1,9 @@
+abseil (20240722.0-3+pexip24u1) pexip; urgency=medium
+
+  * Backport trixie version.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 08 May 2025 10:10:00 +0000
+
 abseil (20240722.0-3) unstable; urgency=medium
 
   * Team upload.
