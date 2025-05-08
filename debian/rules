@@ -19,17 +19,18 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow reproducible=+fixfilepath
 
 # Unit tests require more than 2 GB of RAM, so disable them on mipsel.
 #
-# Unit tests are not yet passing on ppc64, so disable them there as well.
-#
 # Disable unit tests unconditionally if nocheck is set.
-ifneq ($(filter $(DEB_HOST_ARCH),mipsel ppc64),)
+ifeq ($(DEB_HOST_ARCH),mipsel)
 ABSL_RUN_TESTS=OFF
 else ifneq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
 ABSL_RUN_TESTS=OFF
 else
 ABSL_RUN_TESTS=ON
 endif
-ABSL_RUN_TESTS=OFF
+ifneq ($(filter ppc64el ppc64,$(DEB_HOST_ARCH)),)
+# https://github.com/abseil/abseil-cpp/issues/1804
+ABSL_TEST_EXTRA_ARGS="ARGS+=--exclude-regex absl_failure_signal_handler_test"
+endif
 
 %:
 	dh $@
@@ -39,12 +40,8 @@ override_dh_auto_clean:
 	$(RM) -r $(CURDIR)/shared
 
 override_dh_auto_configure:
-	dh_auto_configure -Bstatic -- -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=OFF
-ifeq ($(ABSL_RUN_TESTS),ON)
-	dh_auto_configure -Bshared -- -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=ON -DBUILD_TESTING=ON -DABSL_BUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=OFF
-else
+	dh_auto_configure -Bstatic -- -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON -DABSL_BUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=OFF
 	dh_auto_configure -Bshared -- -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=ON
-endif
 
 override_dh_auto_build:
 	dh_auto_build -Bstatic
@@ -52,7 +49,7 @@ override_dh_auto_build:
 
 ifeq ($(ABSL_RUN_TESTS),ON)
 override_dh_auto_test:
-	dh_auto_test -Bshared
+	dh_auto_test -Bstatic -- $(ABSL_TEST_EXTRA_ARGS)
 endif
 
 override_dh_auto_install:

@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 EOF
 
 cat >CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.5...3.31)
 project(test CXX)
 set(CMAKE_CXX_STANDARD 17)
 add_executable(test test.cc)

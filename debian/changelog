@@ -1,3 +1,122 @@
+abseil (20240722.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Backport fix for CVE-2025-0838. Closes: #1098903 
+
+ -- Tobias Frost <tobi@debian.org>  Sat, 05 Apr 2025 14:59:48 +0200
+
+abseil (20240722.0-2) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * Enable Salsa CI. 
+
+ -- Tobias Frost <tobi@debian.org>  Mon, 31 Mar 2025 10:33:17 +0200
+
+abseil (20240722.0-1.5) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Skip absl_failure_signal_handler_test on ppc64 too.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sun, 09 Mar 2025 12:33:48 -0400
+
+abseil (20240722.0-1.4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Upload to unstable.
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 08 Mar 2025 09:41:27 -0400
+
+abseil (20240722.0-1.3) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Correct a mistake in the skip in -1.2.
+
+ -- Stefano Rivera <stefanor@debian.org>  Tue, 04 Mar 2025 07:52:01 -0400
+
+abseil (20240722.0-1.2) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Skip absl_failure_signal_handler_test on ppc64el, it's known to fail.
+
+ -- Stefano Rivera <stefanor@debian.org>  Mon, 03 Mar 2025 21:19:21 -0400
+
+abseil (20240722.0-1.1) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Bump cmake_minimum_required in the cmake autopkgtest to 3.5...3.31.
+    (Closes: #1087850)
+
+ -- Stefano Rivera <stefanor@debian.org>  Sat, 01 Mar 2025 10:56:40 -0400
+
+abseil (20240722.0-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Tue, 03 Sep 2024 14:45:21 -0400
+
+abseil (20240116.2-2) experimental; urgency=medium
+
+  * Backport an upstream patch to enable demangling on mips64el.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Thu, 16 May 2024 16:15:02 -0400
+
+abseil (20240116.2-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Wed, 08 May 2024 16:16:57 -0400
+
+abseil (20230802.1-4) unstable; urgency=medium
+
+  * Add extra build dependencies to prevent premature migration (see
+    https://bugs.debian.org/1059535#39) and to ensure tests have access to
+    tzdata.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Mon, 01 Apr 2024 17:50:22 -0400
+
+abseil (20230802.1-3) unstable; urgency=medium
+
+  * Apply an upstream patch to prevent SIGILLs on RISC-V. (Closes:
+    #1059532)
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Sun, 31 Mar 2024 21:05:37 -0400
+
+abseil (20230802.1-2) experimental; urgency=medium
+
+  * Disable a unit test to work around https://bugs.debian.org/1059340.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Fri, 22 Dec 2023 15:46:28 -0500
+
+abseil (20230802.1-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Tue, 19 Sep 2023 11:38:43 -0400
+
+abseil (20230802.0-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Thu, 07 Sep 2023 13:53:48 -0400
+
+abseil (20230125.3-2) experimental; urgency=medium
+
+  * Reenable unit tests, which were accidentally disabled in the previous
+    version.
+  * Backport an upstream patch to allow building tests on mipsel.
+  * Backport a patch from upstream to correct symbolization on ppc64, and
+    enable unit tests on that platform.
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Wed, 02 Aug 2023 14:06:31 -0400
+
+abseil (20230125.3-1) experimental; urgency=medium
+
+  * New upstream release. (Closes: #1033466, #1034908)
+  * Run tests serially on riscv64 to avoid hitting Debian build hardware
+    limits. (Closes: #1025221)
+
+ -- Benjamin Barenblat <bbaren@debian.org>  Sun, 14 May 2023 19:12:11 -0400
+
 abseil (20220623.1-1+pexip24u7) pexip-bookworm; urgency=medium
 
   * New versioning scheme

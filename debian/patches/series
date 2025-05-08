@@ -1,6 +1,6 @@
 configure.diff
 cpu-features.diff
 latomic.diff
-empty-flags-library.diff
-leaky-pkgconfig-cflags.diff
 cordz-info-statistics-test.diff
+pkg-config-directives.diff
+CVE-2025-0838.patch

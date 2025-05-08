@@ -13,6 +13,6 @@
 # the License.
 
 version=4
-opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%@PACKAGE@-$1.tar.gz%, uversionmangle=s/^/0~/" \
-	https://github.com/abseil/abseil-cpp/releases \
-	(?:.*?/)?v?(\d[\d.]*)\.tar\.gz
+opts="filenamemangle=s%(?:.*?)?v?@ANY_VERSION@(@ARCHIVE_EXT@)%@PACKAGE@-$1$2%, uversionmangle=s/(\d)[-+_.]?((RC|rc|pre|dev|beta|alpha)\d*)$/$1~$2/" \
+	https://github.com/abseil/abseil-cpp/tags \
+	(?:.*?/)?v?@ANY_VERSION@@ARCHIVE_EXT@
