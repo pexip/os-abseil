@@ -1,3 +1,10 @@
+abseil (20240722.0-4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix autopkgtest regression (Closes: #1105827)
+
+ -- Nilesh Patra <nilesh@debian.org>  Wed, 28 May 2025 08:09:18 +0530
+
 abseil (20240722.0-3) unstable; urgency=medium
 
   * Team upload.
