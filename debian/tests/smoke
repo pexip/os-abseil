@@ -33,5 +33,5 @@ TEST(AbseilTest, StrJoinWorks) {
 }  // namespace
 EOF
 
-g++ -o smoke smoke.cc -labsl_strings -lgtest -lgtest_main -pthread
+g++ -o smoke smoke.cc -labsl_strings -labsl_raw_logging_internal -lgtest -lgtest_main -pthread
 ./smoke
