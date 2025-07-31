@@ -1,3 +1,9 @@
+abseil (20240722.0-4+pexip25u1) pexip-trixie; urgency=medium
+
+  * New upstream release
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 31 Jul 2025 11:40:02 +0000
+
 abseil (20240722.0-4) unstable; urgency=medium
 
   * Non-maintainer upload.
