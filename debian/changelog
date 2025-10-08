@@ -1,3 +1,9 @@
+abseil (20250512.1-0+pexip25u1) pexip-trixie; urgency=medium
+
+  * New upstream release
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Wed, 08 Oct 2025 17:09:39 +0100
+
 abseil (20240722.0-4+pexip25u1+pexip25u1) pexip-trixie; urgency=medium
 
   * New upstream release
