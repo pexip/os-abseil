@@ -3,4 +3,3 @@ cpu-features.diff
 latomic.diff
 cordz-info-statistics-test.diff
 pkg-config-directives.diff
-CVE-2025-0838.patch

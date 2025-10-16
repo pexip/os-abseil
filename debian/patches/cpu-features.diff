@@ -15,9 +15,11 @@ Explicitly set supported CPU features.
     Debian supports some armhf processors without it. Keep it enabled on arm64,
     since all arm64 processors have it.
 
---- a/absl/base/config.h
-+++ b/absl/base/config.h
-@@ -875,7 +875,7 @@
+Index: abseil/absl/base/config.h
+===================================================================
+--- abseil.orig/absl/base/config.h
++++ abseil/absl/base/config.h
+@@ -766,7 +766,7 @@ static_assert(ABSL_INTERNAL_INLINE_NAMES
  // which architectures support the various x86 instruction sets.
  #ifdef ABSL_INTERNAL_HAVE_SSE
  #error ABSL_INTERNAL_HAVE_SSE cannot be directly set
@@ -26,7 +28,7 @@ Explicitly set supported CPU features.
  #define ABSL_INTERNAL_HAVE_SSE 1
  #elif (defined(_M_X64) || (defined(_M_IX86_FP) && _M_IX86_FP >= 1)) && \
      !defined(_M_ARM64EC)
-@@ -891,7 +891,7 @@
+@@ -782,7 +782,7 @@ static_assert(ABSL_INTERNAL_INLINE_NAMES
  // which architectures support the various x86 instruction sets.
  #ifdef ABSL_INTERNAL_HAVE_SSE2
  #error ABSL_INTERNAL_HAVE_SSE2 cannot be directly set
@@ -35,7 +37,7 @@ Explicitly set supported CPU features.
  #define ABSL_INTERNAL_HAVE_SSE2 1
  #elif (defined(_M_X64) || (defined(_M_IX86_FP) && _M_IX86_FP >= 2)) && \
      !defined(_M_ARM64EC)
-@@ -913,8 +913,6 @@
+@@ -804,8 +804,6 @@ static_assert(ABSL_INTERNAL_INLINE_NAMES
  // by the CPU.
  #ifdef ABSL_INTERNAL_HAVE_SSSE3
  #error ABSL_INTERNAL_HAVE_SSSE3 cannot be directly set
@@ -44,11 +46,11 @@ Explicitly set supported CPU features.
  #endif
  
  // ABSL_INTERNAL_HAVE_ARM_NEON is used for compile-time detection of NEON (ARM
-@@ -926,7 +924,7 @@
+@@ -817,7 +815,7 @@ static_assert(ABSL_INTERNAL_INLINE_NAMES
  // https://llvm.org/docs/CompileCudaWithLLVM.html#detecting-clang-vs-nvcc-from-code
  #ifdef ABSL_INTERNAL_HAVE_ARM_NEON
  #error ABSL_INTERNAL_HAVE_ARM_NEON cannot be directly set
--#elif defined(__ARM_NEON) && !defined(__CUDA_ARCH__)
+-#elif defined(__ARM_NEON) && !(defined(__NVCC__) && defined(__CUDACC__))
 +#elif defined(__aarch64__)
  #define ABSL_INTERNAL_HAVE_ARM_NEON 1
  #endif
