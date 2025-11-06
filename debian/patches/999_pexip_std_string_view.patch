@@ -1,0 +1,18 @@
+Force abseil to build with C++17 std::string_view use.
+
+This requires all code using abseil to compile using -std=c++17, but
+not using it will cause GRPC to FTBFS as it requires that this is the case.
+
+Index: abseil/absl/base/options.h
+===================================================================
+--- abseil.orig/absl/base/options.h
++++ abseil/absl/base/options.h
+@@ -97,7 +97,7 @@
+ // absl::string_view is a typedef of std::string_view, use the feature macro
+ // ABSL_USES_STD_STRING_VIEW.
+ 
+-#define ABSL_OPTION_USE_STD_STRING_VIEW 0
++#define ABSL_OPTION_USE_STD_STRING_VIEW 1
+ 
+ // ABSL_OPTION_USE_STD_ORDERING
+ //
