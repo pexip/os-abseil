@@ -37,7 +37,8 @@ XS-Pexip-Upstream: http://deb.debian.org/debian/ trixie
 X-Pexip-Note: Abseil has been upgraded to a newer version than in Debian trixie.
  Patches which have been merged upstream have therefore been dropped (e.g.
  CVE-2025-0838.patch) and the package names of the library have been updated
- to match the SONAME.
+ to match the SONAME.  Some patches have been updated to fix diff context for
+ the newer version of abseil.
 
 Package: libabsl-dev
 Architecture: any
