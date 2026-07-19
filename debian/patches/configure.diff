@@ -15,7 +15,7 @@ Configure Abseil for Debian.
 
 --- a/CMake/AbseilHelpers.cmake
 +++ b/CMake/AbseilHelpers.cmake
-@@ -314,6 +314,7 @@
+@@ -314,6 +314,7 @@ Cflags: -I\${includedir}${PC_CFLAGS}\n")
        set_target_properties(${_NAME} PROPERTIES
          OUTPUT_NAME "absl_${_NAME}"
          SOVERSION "${ABSL_SOVERSION}"
@@ -25,67 +25,32 @@ Configure Abseil for Debian.
    else()
 --- a/absl/base/options.h
 +++ b/absl/base/options.h
-@@ -94,7 +94,7 @@
- // User code should not inspect this macro.  To check in the preprocessor if
- // absl::any is a typedef of std::any, use the feature macro ABSL_USES_STD_ANY.
- 
--#define ABSL_OPTION_USE_STD_ANY 2
-+#define ABSL_OPTION_USE_STD_ANY 0
- 
- 
- // ABSL_OPTION_USE_STD_OPTIONAL
-@@ -121,7 +121,7 @@
- // absl::optional is a typedef of std::optional, use the feature macro
- // ABSL_USES_STD_OPTIONAL.
- 
--#define ABSL_OPTION_USE_STD_OPTIONAL 2
-+#define ABSL_OPTION_USE_STD_OPTIONAL 0
- 
- 
- // ABSL_OPTION_USE_STD_STRING_VIEW
-@@ -148,7 +148,7 @@
- // absl::string_view is a typedef of std::string_view, use the feature macro
- // ABSL_USES_STD_STRING_VIEW.
- 
--#define ABSL_OPTION_USE_STD_STRING_VIEW 2
-+#define ABSL_OPTION_USE_STD_STRING_VIEW 0
- 
- // ABSL_OPTION_USE_STD_VARIANT
- //
-@@ -174,7 +174,7 @@
- // absl::variant is a typedef of std::variant, use the feature macro
- // ABSL_USES_STD_VARIANT.
- 
--#define ABSL_OPTION_USE_STD_VARIANT 2
-+#define ABSL_OPTION_USE_STD_VARIANT 0
- 
- // ABSL_OPTION_USE_STD_ORDERING
- //
-@@ -226,7 +226,7 @@
+@@ -151,7 +151,7 @@
  // allowed.
  
  #define ABSL_OPTION_USE_INLINE_NAMESPACE 1
--#define ABSL_OPTION_INLINE_NAMESPACE_NAME lts_20240722
-+#define ABSL_OPTION_INLINE_NAMESPACE_NAME debian7
+-#define ABSL_OPTION_INLINE_NAMESPACE_NAME lts_20260526
++#define ABSL_OPTION_INLINE_NAMESPACE_NAME debian10
  
  // ABSL_OPTION_HARDENED
  //
-@@ -253,6 +253,6 @@
+@@ -181,7 +181,7 @@
  // checks enabled by this option may abort the program in a different way and
  // log additional information when `NDEBUG` is not defined.
  
 -#define ABSL_OPTION_HARDENED 0
 +#define ABSL_OPTION_HARDENED 1
  
- #endif  // ABSL_BASE_OPTIONS_H_
+ // ABSL_OPTION_INLINE_HW_ACCEL_STRATEGY
+ //
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -24,7 +24,7 @@
+@@ -24,7 +24,7 @@ if (POLICY CMP0141)
  endif (POLICY CMP0141)
  
- project(absl LANGUAGES CXX VERSION 20240722)
--set(ABSL_SOVERSION "2407.0.0")
-+set(ABSL_SOVERSION "20240722")
+ project(absl LANGUAGES CXX VERSION 20260526)
+-set(ABSL_SOVERSION "2605.0.0")
++set(ABSL_SOVERSION "20260526")
  include(CTest)
  
  # Output directory is correct by default for most build setups. However, when

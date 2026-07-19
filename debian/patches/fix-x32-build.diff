@@ -1,0 +1,20 @@
+--- a/absl/debugging/symbolize_test.cc
++++ b/absl/debugging/symbolize_test.cc
+@@ -457,7 +457,7 @@ void *ABSL_ATTRIBUTE_NOINLINE non_inline
+   void *pc = nullptr;
+ #if defined(__i386__)
+   __asm__ __volatile__("call 1f;\n 1: pop %[PC]" : [PC] "=r"(pc));
+-#elif defined(__x86_64__)
++#elif defined(__x86_64__) && !defined(__ILP32__)
+   __asm__ __volatile__("leaq 0(%%rip),%[PC];\n" : [PC] "=r"(pc));
+ #endif
+   return pc;
+@@ -476,7 +476,7 @@ void ABSL_ATTRIBUTE_NOINLINE TestWithPCI
+ 
+ void ABSL_ATTRIBUTE_NOINLINE TestWithPCInsideInlineFunction() {
+ #if defined(ABSL_HAVE_ATTRIBUTE_ALWAYS_INLINE) && \
+-    (defined(__i386__) || defined(__x86_64__))
++    (defined(__i386__) || (defined(__x86_64__) && !defined(__ILP32__)))
+   void *pc = inline_func();  // Must be inlined.
+   const char *symbol = TrySymbolize(pc);
+   ASSERT_NE(symbol, nullptr) << "TestWithPCInsideInlineFunction failed";

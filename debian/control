@@ -14,14 +14,15 @@
 
 Source: abseil
 Priority: optional
-Maintainer: Benjamin Barenblat <bbaren@debian.org>
+Maintainer: Matthias Klose <doko@debian.org>
 Build-Depends:
  cmake (>= 3.16),
  debhelper-compat (= 12),
  googletest (>= 1.12),
+ lsb-release,
  tzdata,
 Rules-Requires-Root: no
-Standards-Version: 4.7.0
+Standards-Version: 4.7.4
 Section: libs
 Homepage: https://abseil.io/
 Vcs-Browser: https://salsa.debian.org/debian/abseil
@@ -38,11 +39,10 @@ Architecture: any
 Multi-Arch: same
 Section: libdevel
 Depends:
- libabsl20240722 (= ${binary:Version}),
+ libabsl20260526 (= ${binary:Version}),
  ${misc:Depends},
 Recommends:
   cmake (>= 3.16) | pkgconf,
-  g++ (>= 7.5.0),
   libgmock-dev (>= 1.12),
 Description: ${source:Synopsis} (development files)
  ${source:Extended-Description}
@@ -50,7 +50,7 @@ Description: ${source:Synopsis} (development files)
  This package contains header files and other data necessary for developing with
  Abseil.
 
-Package: libabsl20240722
+Package: libabsl20260526
 Architecture: any
 Multi-Arch: same
 Depends: ${shlibs:Depends}, ${misc:Depends}

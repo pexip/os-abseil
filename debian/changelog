@@ -1,3 +1,64 @@
+abseil (20260526.0-2) unstable; urgency=medium
+
+  * Don't use <bmi2intrin.h> directly; include <immintrin.h>.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 19 Jul 2026 13:18:20 +0200
+
+abseil (20260526.0-1) experimental; urgency=medium
+
+  * New upstream version.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 16 Jun 2026 14:14:35 +0200
+
+abseil (20260107.0-4) experimental; urgency=medium
+
+  * Fix build with C++23 / GCC 16.
+
+ -- Matthias Klose <doko@debian.org>  Tue, 31 Mar 2026 08:12:56 +0200
+
+abseil (20260107.0-3) experimental; urgency=medium
+
+  * Ignore absl_symbolize_test test failure on hppa and ppc64.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 07 Feb 2026 19:54:53 +0100
+
+abseil (20260107.0-2) experimental; urgency=medium
+
+  * Ignore absl_hash_instantiated_test test failure on x32.
+  * Ignore absl_any_invocable_test test failure on sh4.
+  * Ignore absl_hashtablez_sampler_test absl_cordz_sample_token_test test
+    failures on riscv64 (Debian only).
+
+ -- Matthias Klose <doko@debian.org>  Tue, 03 Feb 2026 12:12:57 +0100
+
+abseil (20260107.0-1) experimental; urgency=medium
+
+  * Update maintainer. Closes: #1120025.
+  * Bump standards version.
+  * Ignore absl_waiter_test test failure on sparc64.
+
+ -- Matthias Klose <doko@debian.org>  Sun, 01 Feb 2026 10:27:08 +0100
+
+abseil (20260107.0-0.1) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream version. Addresses: #1118630.
+  * Bump soname and package name, update shlibs and lintian files.
+
+ -- Matthias Klose <doko@debian.org>  Mon, 19 Jan 2026 09:03:16 +0100
+
+abseil (20250814.1-0.1) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream version. Addresses: #1118630.
+    - Fix build failure. Closes: #1114038.
+  * Build with ABSL_OPTION_USE_STD_STRING_VIEW. Closes: #1108841.
+  * Bump soname and package name, update shlibs and lintian files.
+  * Bump standards version.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 13 Dec 2025 13:41:42 +0100
+
 abseil (20240722.0-4) unstable; urgency=medium
 
   * Non-maintainer upload.
@@ -8,14 +69,14 @@ abseil (20240722.0-4) unstable; urgency=medium
 abseil (20240722.0-3) unstable; urgency=medium
 
   * Team upload.
-  * Backport fix for CVE-2025-0838. Closes: #1098903 
+  * Backport fix for CVE-2025-0838. Closes: #1098903.
 
  -- Tobias Frost <tobi@debian.org>  Sat, 05 Apr 2025 14:59:48 +0200
 
 abseil (20240722.0-2) UNRELEASED; urgency=medium
 
   * Team upload.
-  * Enable Salsa CI. 
+  * Enable Salsa CI.
 
  -- Tobias Frost <tobi@debian.org>  Mon, 31 Mar 2025 10:33:17 +0200
 

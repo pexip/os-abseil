@@ -13,6 +13,11 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+distribution := $(shell lsb_release -is)
+derivative := $(shell if dpkg-vendor --derives-from Ubuntu; then echo Ubuntu; \
+		elif dpkg-vendor --derives-from Debian; then echo Debian; \
+		else echo Unknown; fi)
+
 include /usr/share/dpkg/architecture.mk
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow reproducible=+fixfilepath
@@ -21,16 +26,54 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow reproducible=+fixfilepath
 #
 # Disable unit tests unconditionally if nocheck is set.
 ifeq ($(DEB_HOST_ARCH),mipsel)
-ABSL_RUN_TESTS=OFF
+  ABSL_RUN_TESTS=OFF
 else ifneq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
-ABSL_RUN_TESTS=OFF
+  ABSL_RUN_TESTS=OFF
 else
-ABSL_RUN_TESTS=ON
+  ABSL_RUN_TESTS=ON
 endif
-ifneq ($(filter ppc64el ppc64,$(DEB_HOST_ARCH)),)
-# https://github.com/abseil/abseil-cpp/issues/1804
-ABSL_TEST_EXTRA_ARGS="ARGS+=--exclude-regex absl_failure_signal_handler_test"
+
+TEST_EXCLUSIONS =
+ifneq (,$(filter armhf,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_raw_hash_set_test
+
+else ifneq (,$(filter hppa,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_btree_test absl_raw_hash_set_test absl_stacktrace_test absl_symbolize_test
+
+else ifneq (,$(filter powerpc,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_raw_hash_set_test absl_failure_signal_handler_test absl_stacktrace_test
+
+else ifneq (,$(filter ppc64el,$(DEB_HOST_ARCH)))
+  # https://github.com/abseil/abseil-cpp/issues/1804
+  TEST_EXCLUSIONS += absl_mutex_test absl_failure_signal_handler_test absl_stacktrace_test
+
+else ifneq (,$(filter ppc64,$(DEB_HOST_ARCH)))
+  # https://github.com/abseil/abseil-cpp/issues/1804
+  TEST_EXCLUSIONS += absl_mutex_test absl_failure_signal_handler_test absl_stacktrace_test absl_symbolize_test
+
+else ifneq (,$(filter riscv64,$(DEB_HOST_ARCH)))
+  ifeq ($(derivative),Ubuntu)
+    # test pass
+  else
+    # https://github.com/abseil/abseil-cpp/issues/2002
+    TEST_EXCLUSIONS += absl_hashtablez_sampler_test absl_cordz_sample_token_test
+  endif
+
+else ifneq (,$(filter sh4,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_any_invocable_test
+
+else ifneq (,$(filter sparc64,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_waiter_test
+
+else ifneq (,$(filter x32,$(DEB_HOST_ARCH)))
+  TEST_EXCLUSIONS += absl_hash_instantiated_test
 endif
+
+ifneq (,$(TEST_EXCLUSIONS))
+  SPACE = $(EMPTY) $(EMPTY)
+  ABSL_TEST_EXTRA_ARGS = ARGS+="--exclude-regex '($(subst $(SPACE),|,$(TEST_EXCLUSIONS)))'"
+endif
+
 
 %:
 	dh $@
