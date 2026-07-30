@@ -13,10 +13,8 @@ Configure Abseil for Debian.
 
   - Enable upstream's hardened build mode.
 
-Index: abseil/CMake/AbseilHelpers.cmake
-===================================================================
---- abseil.orig/CMake/AbseilHelpers.cmake
-+++ abseil/CMake/AbseilHelpers.cmake
+--- a/CMake/AbseilHelpers.cmake
++++ b/CMake/AbseilHelpers.cmake
 @@ -314,6 +314,7 @@ Cflags: -I\${includedir}${PC_CFLAGS}\n")
        set_target_properties(${_NAME} PROPERTIES
          OUTPUT_NAME "absl_${_NAME}"
@@ -25,37 +23,34 @@ Index: abseil/CMake/AbseilHelpers.cmake
        )
      endif()
    else()
-Index: abseil/absl/base/options.h
-===================================================================
---- abseil.orig/absl/base/options.h
-+++ abseil/absl/base/options.h
-@@ -97,7 +97,7 @@
- // absl::string_view is a typedef of std::string_view, use the feature macro
- // ABSL_USES_STD_STRING_VIEW.
+--- a/absl/base/options.h
++++ b/absl/base/options.h
+@@ -151,7 +151,7 @@
+ // allowed.
  
--#define ABSL_OPTION_USE_STD_STRING_VIEW 2
-+#define ABSL_OPTION_USE_STD_STRING_VIEW 0
+ #define ABSL_OPTION_USE_INLINE_NAMESPACE 1
+-#define ABSL_OPTION_INLINE_NAMESPACE_NAME lts_20260526
++#define ABSL_OPTION_INLINE_NAMESPACE_NAME debian10
  
- // ABSL_OPTION_USE_STD_ORDERING
+ // ABSL_OPTION_HARDENED
  //
-@@ -179,6 +179,6 @@
+@@ -181,7 +181,7 @@
  // checks enabled by this option may abort the program in a different way and
  // log additional information when `NDEBUG` is not defined.
  
 -#define ABSL_OPTION_HARDENED 0
 +#define ABSL_OPTION_HARDENED 1
  
- #endif  // ABSL_BASE_OPTIONS_H_
-Index: abseil/CMakeLists.txt
-===================================================================
---- abseil.orig/CMakeLists.txt
-+++ abseil/CMakeLists.txt
+ // ABSL_OPTION_INLINE_HW_ACCEL_STRATEGY
+ //
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -24,7 +24,7 @@ if (POLICY CMP0141)
  endif (POLICY CMP0141)
  
- project(absl LANGUAGES CXX VERSION 20250512)
--set(ABSL_SOVERSION "2505.0.0")
-+set(ABSL_SOVERSION "20250512")
+ project(absl LANGUAGES CXX VERSION 20260526)
+-set(ABSL_SOVERSION "2605.0.0")
++set(ABSL_SOVERSION "20260526")
  include(CTest)
  
  # Output directory is correct by default for most build setups. However, when
