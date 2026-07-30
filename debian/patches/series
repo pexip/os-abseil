@@ -5,4 +5,3 @@ cordz-info-statistics-test.diff
 pkg-config-directives.diff
 fix-x32-build.diff
 header-include.diff
-999_pexip_std_string_view.patch
