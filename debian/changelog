@@ -1,3 +1,9 @@
+abseil (20260526.0-2+pexip25u1) pexip-trixie; urgency=medium
+
+  * Update to forky version.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Fri, 31 Jul 2026 16:29:25 +0100
+
 abseil (20260526.0-2) unstable; urgency=medium
 
   * Don't use <bmi2intrin.h> directly; include <immintrin.h>.
